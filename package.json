@@ -7,15 +7,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/66070295pochara/MIND_GALLERY.git"
+    "url": "https://github.com/Thanakrit66070262/MindGallery-Cloud.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/66070295pochara/MIND_GALLERY/issues"
-  },
-  "homepage": "https://github.com/66070295pochara/MIND_GALLERY#readme",
+  "homepage": "https://github.com/Thanakrit66070262/MindGallery-Cloud.git#readme",
   "description": "",
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.899.0",

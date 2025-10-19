@@ -1,4 +1,3 @@
-
 import { cognito, SignUpCommand, ConfirmSignUpCommand, InitiateAuthCommand } from "../config/aws.js";
 import axios from "axios";
 import qs from "querystring";

@@ -109,7 +109,7 @@
                   class="w-full h-auto fade-in"
                   onload="this.classList.add('loaded')"
                   onerror="this.onerror=null; this.src='https://placehold.co/600x600?text=Image+Unavailable';"
-                  onclick="openLightbox('<%= post.imageUrl %>', `<%= (post.caption || '').replace(/`/g,'\\`') %>`)"
+                  onclick="openLightbox('<%= post.imageUrl %>',<%= (post.caption || '').replace(/`/g,'\\`') %>`)"
                   style="cursor: zoom-in;"
                 />
                 <% if (post.caption) { %>

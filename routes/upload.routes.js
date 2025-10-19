@@ -1,9 +1,15 @@
 // routes/upload.routes.js
-const router = require('express').Router();
-const { requireAuth } = require('../middlewares/authenticate');
-const uploadController = require('../controllers/upload.controller');
+import express from "express";
+import { requireAuth } from "../middlewares/authenticate.js";
+import { getPresignedPutUrl, renderUploadPage } from "../controllers/upload.controller.js";
 
-router.put('/presign', requireAuth, uploadController.getPresignedPutUrl);
-router.get('/', uploadController.renderUploadPage);
+const router = express.Router();
 
-module.exports = router;
+// 🔹 หน้าสำหรับ render ฟอร์มอัปโหลด (ไม่จำเป็นต้องล็อกอินก็ได้ แต่แนะนำให้มี)
+router.get("/", requireAuth, renderUploadPage);
+
+// 🔹 API สำหรับขอ presigned URL เพื่ออัปโหลดไฟล์ขึ้น S3
+// ใช้ method PUT เพราะเป็น presign สำหรับ S3 PUT Object
+router.put("/presign", requireAuth, getPresignedPutUrl);
+
+export default router;

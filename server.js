@@ -1,31 +1,43 @@
-require("dotenv").config();
-const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
+import dotenv from "dotenv";
+dotenv.config();
+
+import express, { json, urlencoded } from "express";
+import cookieParser from "cookie-parser";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+// ====== Fix __dirname for ESM ======
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 
-// View engine
+// ====== View engine ======
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", join(__dirname, "views"));
 
-// Middlewares
-app.use(express.json());
+// ====== Middlewares ======
+app.use(json());
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(urlencoded({ extended: true }));
+app.use(express.static(join(__dirname, "public")));
 
-// Routes
-const viewRoutes = require("./routes/view.routes");
-const authRoutes = require("./routes/auth.routes");
+// ====== Routes ======
+import viewRoutes from "./routes/view.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+import postRoutes from "./routes/upload.routes.js";
 
 app.use("/", viewRoutes);
 app.use("/", authRoutes);
-
-const postRoutes = require("./routes/upload.routes");
 app.use("/upload", postRoutes);
-// 404
+
+// ====== 404 ======
 app.use((req, res) => res.status(404).send("Not found"));
 
+// ====== Start server ======
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`http://localhost:${PORT}/`));
+app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}/`));
+app.on('close', () => console.log('⚠️ server closed'));
+process.on('exit', (code) => console.log('⚠️ process exit', code));
+process.on('SIGINT', () => console.log('⚠️ SIGINT'));
+process.on('SIGTERM', () => console.log('⚠️ SIGTERM'));

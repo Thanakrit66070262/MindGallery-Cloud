@@ -1,17 +1,25 @@
-const router = require("express").Router();
-const ctrl = require("../controllers/auth.controller");
+import express from "express";
+import {
+  renderSignup, signup,
+  renderConfirm, confirm,
+  renderLogin,  login,
+  logout, oauthCallback,
+} from "../controllers/auth.controller.js";
 
-router.get("/signup", ctrl.renderSignup);
-router.post("/signup", ctrl.signup);
+const router = express.Router();
 
-router.get("/confirm", ctrl.renderConfirm);
-router.post("/confirm", ctrl.confirm);
+// Forms (GET) + Actions (POST)
+router.get("/signup",  renderSignup);
+router.post("/signup", signup);
 
-router.get("/login", ctrl.renderLogin);
-router.post("/login", ctrl.login);
+router.get("/confirm", renderConfirm);
+router.post("/confirm", confirm);
 
-router.get("/logout", ctrl.logout);
+router.get("/login",  renderLogin);
+router.post("/login", login);
 
-router.get("/auth/callback", ctrl.oauthCallback);
+// Auth session mgmt
+router.post("/logout", logout);       // แนะนำ POST แทน GET
+router.get("/auth/callback", oauthCallback);
 
-module.exports = router;
+export default router;

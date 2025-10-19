@@ -1,6 +1,7 @@
-// src/middlewares/authenticate.js
-const { CognitoJwtVerifier } = require('aws-jwt-verify');
-const jwt = require('jsonwebtoken');
+// middlewares/authenticate.js
+import 'dotenv/config';
+import { CognitoJwtVerifier } from 'aws-jwt-verify';
+import jwt from 'jsonwebtoken';
 
 // ✅ สร้าง verifier สำหรับ Access และ Id Token
 const accessVerifier = CognitoJwtVerifier.create({
@@ -68,4 +69,4 @@ function requireRole(role) {
   };
 }
 
-module.exports = { authenticateCognitoJWT, requireAuth, requireRole };
+export { authenticateCognitoJWT, requireAuth, requireRole };

@@ -1,5 +1,4 @@
 // controllers/upload.controller.js
-
 import path from 'path';
 import { s3, BUCKET } from '../config/aws.js';
 import { PutObjectCommand } from '@aws-sdk/client-s3';

@@ -32,10 +32,15 @@ export const renderOwnGallery = async (req, res) => {
       })
     );
     res.render('owngallery', { username, posts });
-  } catch (err) {
-    console.error('Error loading gallery:', err);
-    res.status(500).send('Error loading gallery');
-  }
+    } catch (err) {
+  console.error('Error loading gallery:', {
+    name: err.name,
+    code: err.$metadata?.httpStatusCode || err.Code,
+    message: err.message,
+    stack: err.stack,
+  });
+  res.status(500).send('Error loading gallery');
+}
 };
 
 export const renderFeedGallery = async (req, res) => {

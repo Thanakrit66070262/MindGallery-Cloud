@@ -74,6 +74,8 @@ export const login = async (req, res) => {
     const { AccessToken, ExpiresIn } = data.AuthenticationResult;
     setAccessCookie(res, AccessToken, ExpiresIn);
     // สำหรับ API/Frontend SPA: ส่ง JSON กลับ
+    console.log("User logged in:", username);
+    console.log("Access Token:", AccessToken);
     res.json({ message: "Login successful", username });
     // ถ้าเป็น SSR/redirect ให้ใช้ return res.redirect(...)
   } catch (err) {
@@ -84,7 +86,7 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   res.clearCookie("access_token", { path: "/" });
-  res.redirect("/login");
+  return res.redirect("/login");
 };
 
 

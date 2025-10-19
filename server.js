@@ -37,7 +37,3 @@ app.use((req, res) => res.status(404).send("Not found"));
 // ====== Start server ======
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}/`));
-app.on('close', () => console.log('⚠️ server closed'));
-process.on('exit', (code) => console.log('⚠️ process exit', code));
-process.on('SIGINT', () => console.log('⚠️ SIGINT'));
-process.on('SIGTERM', () => console.log('⚠️ SIGTERM'));
